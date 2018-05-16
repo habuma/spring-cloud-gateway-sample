@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: helloservice
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+        
+  endpoint:
+    health:
+      show-details: always      
+
+---
+spring:
+  profiles: hello1
+  
+server:
+  port: 9080
+  
+eureka:
+  instance:
+    hostname: hello1
+  
+---
+spring:
+  profiles: hello2
+  
+server:
+  port: 9081
+  
+eureka:
+  instance:
+    hostname: hello2

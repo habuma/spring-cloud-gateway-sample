@@ -1,0 +1,35 @@
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+
+spring:
+  application:
+    name: edge-service
+
+
+  cloud:
+    gateway:
+      routes:
+      - id: bye
+        uri: lb://goodbyeservice
+        predicates:
+        - Path=/bye
+        filters:
+        - name: RequestRateLimiter
+          args:
+            redis-rate-limiter:
+              burst-capacity: 2
+              replenish-rate: 2
+            key-resolver: '#{@userKeyResolver}'
+        - name: Hystrix
+          args:
+            name: byeCommand
+      - id: echo
+        uri: ws://localhost:9000
+        predicates:
+        - Path=/echo
