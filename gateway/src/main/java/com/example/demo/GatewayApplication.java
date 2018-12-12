@@ -11,12 +11,10 @@ import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.context.annotation.Bean;
 
-import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
 @SpringBootApplication
 @EnableHystrix
-@Slf4j
 public class GatewayApplication {
 
 	public static void main(String[] args) {
